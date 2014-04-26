@@ -146,7 +146,11 @@ class CodeGen_PECL_Element_Logo
      */
     function minitCode()
     {
-        return "  php_register_info_logo({$this->id}, \"{$this->mimeType}\", {$this->name}_logo, ".strlen($this->data).");\n";
+
+        return "#if PHP_VERSION_ID < 50500\n
+          php_register_info_logo({$this->id}, \"{$this->mimeType}\", {$this->name}_logo, ".strlen($this->data).");\n
+          #endif\n";
+
     }
 
     /**
@@ -157,7 +161,9 @@ class CodeGen_PECL_Element_Logo
      */
     function mshutdownCode()
     {
-        return "  php_unregister_info_logo({$this->id});\n";
+        return "#if PHP_VERSION_ID < 50500\n
+          php_unregister_info_logo({$this->id});\n
+          #endif\n";
     }
 
     /**
@@ -173,7 +179,7 @@ class CodeGen_PECL_Element_Logo
 /* {{{ phpinfo logo definitions */\n
 
 #if PHP_VERSION_ID < 50500
-#  include \"php_logos.h\"
+#include \"php_logos.h\"
 #endif
 
 ";

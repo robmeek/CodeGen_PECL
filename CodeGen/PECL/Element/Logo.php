@@ -171,7 +171,10 @@ class CodeGen_PECL_Element_Logo
     {
         return "
 /* {{{ phpinfo logo definitions */\n
-#include \"php_logos.h\"
+
+#if PHP_VERSION_ID < 50500
+#  include \"php_logos.h\"
+#endif
 
 ";
     }

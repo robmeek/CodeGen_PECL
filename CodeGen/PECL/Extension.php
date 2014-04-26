@@ -1579,7 +1579,7 @@ PHP_MINFO_FUNCTION({$this->name})
             foreach ($this->logos as $logo) {
                 $code.= $logo->phpinfoCode($this->name);
             }
-            echo "    }\n";
+            $code .= "    }\n";
         }
 
         if (!empty($this->summary)) {
